@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>dummy tweet</title>
+</head>
+<body>
+	<h1>dummy tweet</h1>
+	<form th:action="@{/add}" th:object="${tweet}" method="post">
+		<label for="author">author：</label> <input type="text"
+			th:field="*{author}"> <br> 
+		<label for="tweetContent">tweetContent：</label>
+		<input type="text" th:field="*{tweetContent}"> <br>
+		<label
+			for="feeling">feeling：</label> <input type="radio"
+			th:field="*{feeling}" value="good">good <input type="radio"
+			th:field="*{feeling}" value="neutral">neutral <input
+			type="radio" th:field="*{feeling}" value="not good">not good
+		<br>
+		<button>Submit</button>
+		<br>
+	</form>
+
+	<br>
+	<h1>All tweet</h1>
+	<div th:each="tweet : ${tweets}" th:inline="text">
+		<div>id: [[${tweet.id}]] author: [[${tweet.author}]] tweetCotent:
+			[[${tweet.tweetContent}]] feeling: [[${tweet.feeling}]]</div>
+	</div>
+
+
+</body>
+</html>
