@@ -14,31 +14,31 @@ import com.example.demo.repository.TweetRepository;
 
 @Controller
 public class TweetController {
-	
-	// 
+
 	private final TweetRepository repository;
-	
+
 	@Autowired
 	public TweetController(TweetRepository repository) {
 		this.repository = repository;
 	}
-	
+
 	// get all tweet from repository
 	@GetMapping("/")
 	public String getAllTweets(@ModelAttribute Tweet tweet, Model model) {
-		
+
 		model.addAttribute("tweets", repository.findAll());
 		return "list";
 	}
-	
+
+	// register a tweet from the browser
 	@PostMapping("/add")
 	public String addTweet(@Validated @ModelAttribute Tweet tweet, BindingResult result, Model model) {
 		model.addAttribute("tweets", repository.findAll());
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "list";
 		}
 		repository.save(tweet);
-		
+
 		// redirect root path
 		return "redirect:/";
 	}
